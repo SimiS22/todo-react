@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react'
 
 
 interface TodoContextType {
+    todosArray: { value: string, completed: boolean, id: number }[],
     value: string,
     active: boolean,
     completed: boolean,
@@ -9,19 +10,18 @@ interface TodoContextType {
     isCompleted?: (id: number) => void;
 }
 
-export const todoContext = createContext<TodoContextType>({
+export const ToDoContext = createContext<TodoContextType>({
+    todosArray: [{ value: 'txt', completed: false, id: 1 }],
     value: '',
     active: true,
     completed: false
 })
 
-export const todoContextProvider: React.FC = ({ children }) => {
-    const [value, setValue] = useState('')
-
+export const ToDoContextProvider: React.FC = ({ children }) => {
 
     return (
-        <todoContext.Provider value={{ value: '', active: true, completed: false }}>
+        <ToDoContext.Provider value={{ todosArray: [], value: '', active: true, completed: false }}>
             {children}
-        </todoContext.Provider>
+        </ToDoContext.Provider>
     )
 }

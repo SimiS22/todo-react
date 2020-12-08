@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import TodoItem from '../components/TodoItem'
+import { ToDoContext } from '../contexts/ToDoContext'
 
 const AllWrapper = styled.div`
     display: flex;
@@ -10,8 +12,11 @@ const AllWrapper = styled.div`
 `
 
 const All: React.FC = () => {
+    const todos = useContext(ToDoContext)
     return (
-        <AllWrapper>All</AllWrapper>
+        <AllWrapper>
+            <TodoItem />
+        </AllWrapper>
     )
 }
 export default All

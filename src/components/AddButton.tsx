@@ -1,6 +1,8 @@
-import React from 'react'
-import { PlusCircleOutlined } from '@ant-design/icons'
+import React, { useContext } from 'react'
+import { CheckCircleOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
+import { ToDoContext } from '../contexts/ToDoContext'
+import TodoItem from './TodoItem'
 
 const AddButtonWrapper = styled.div`
     display: flex;
@@ -14,9 +16,15 @@ const AddButtonWrapper = styled.div`
 `
 
 const AddButton: React.FC = () => {
+    const todos = useContext(ToDoContext)
+    const handleOnClick = () => {
+        todos.todosArray.push({ value: todos.value, completed: false, id: todos.todosArray.length });
+        todos.value = '';
+        console.log(todos.todosArray)
+    }
     return (
-        <AddButtonWrapper>
-            <PlusCircleOutlined style={{ fontSize: '28px', color: 'green' }} />
+        <AddButtonWrapper onClick={handleOnClick}>
+            <CheckCircleOutlined style={{ fontSize: '28px', color: 'green' }} />
         </AddButtonWrapper>
     )
 }

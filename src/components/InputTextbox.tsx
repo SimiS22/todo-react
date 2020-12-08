@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { ToDoContext } from '../contexts/ToDoContext'
 
 const InputTextboxWrapper = styled.input`
     height: 50px;
@@ -15,10 +16,12 @@ const InputTextboxWrapper = styled.input`
 
 `
 const InputTextbox: React.FC = () => {
+    const todos = useContext(ToDoContext)
     const [data, setData] = useState('')
 
     const handleOnchange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(event.target.value);
+        todos.value = data;
     }
     return (
         <InputTextboxWrapper type='text' id='input' value={data} placeholder='Enter your text here' autoFocus={true} onChange={handleOnchange} />

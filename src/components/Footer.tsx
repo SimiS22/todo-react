@@ -23,6 +23,7 @@ const StatusesWrapper = styled.div`
     align-items:center;
 `
 
+
 const Footer: React.FC = () => {
     return (
         <FooterWrapper>

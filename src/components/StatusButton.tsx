@@ -9,7 +9,7 @@ const StatusButtonWrapper = styled.div`
     height: 80%;
     justify-content: center;
     align-items: center;
-    text-decoration: none;
+    text-decoration: none !important;
 `
 
 const StatusButton: React.FC<PropsType> = (props) => {
