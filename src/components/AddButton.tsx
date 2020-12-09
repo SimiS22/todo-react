@@ -18,8 +18,9 @@ const AddButtonWrapper = styled.div`
 const AddButton: React.FC = () => {
     const todos = useContext(ToDoContext)
     const handleOnClick = () => {
-        todos.todosArray.push({ value: todos.value, completed: false, id: todos.todosArray.length });
+        todos.setTodoArray?.({ value: todos.currentValue, completed: false, id: todos.todosArray.length })
     }
+    console.log(todos.todosArray)
     return (
         <AddButtonWrapper onClick={handleOnClick}>
             <CheckCircleOutlined style={{ fontSize: '28px', color: 'green' }} />
