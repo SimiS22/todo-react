@@ -21,7 +21,6 @@ const InputTextbox: React.FC = () => {
 
     const handleOnchange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(event.target.value);
-        todos.value = data;
     }
     return (
         <InputTextboxWrapper type='text' id='input' value={data} placeholder='Enter your text here' autoFocus={true} onChange={handleOnchange} />

@@ -19,8 +19,6 @@ const AddButton: React.FC = () => {
     const todos = useContext(ToDoContext)
     const handleOnClick = () => {
         todos.todosArray.push({ value: todos.value, completed: false, id: todos.todosArray.length });
-        todos.value = '';
-        console.log(todos.todosArray)
     }
     return (
         <AddButtonWrapper onClick={handleOnClick}>
