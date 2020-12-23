@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react'
+import { useLocalStorage } from '../useLocalStorage'
 
 interface ToDo {
     value: string,
@@ -9,20 +10,16 @@ interface ToDo {
 interface TodoContextType {
     todosArray: ToDo[],
     currentValue: string,
-    active: boolean,
-    completed: boolean,
-    isActive?: (id: number) => void;
-    isCompleted?: (id: number) => void;
     setInputValue?: (inputData: string) => void;
     setTodoArray?: (inputElement: ToDo) => void;
+    updateTodosArray: (id: number, status: string) => void
 }
 
 let todosData = [{ value: 'txt', completed: false, id: 0 }, { value: 'txt1', completed: true, id: 1 }]
 export const ToDoContext = createContext<TodoContextType>({
     todosArray: [],
     currentValue: '',
-    active: true,
-    completed: false,
+    updateTodosArray: () => undefined
 })
 export const ToDoContextProvider: React.FC = ({ children }) => {
     const [currentData, setCurrentData] = useState('')
@@ -33,8 +30,23 @@ export const ToDoContextProvider: React.FC = ({ children }) => {
     const setTodoArray = (input: ToDo) => {
         setTodos([...todos, input]);
     }
+    const updateTodosArray = (id: number, status: string) => {
+        let filteredTodos: ToDo[] = [];
+        if (status === 'delete') {
+            filteredTodos = todos.filter((element: ToDo) => element.id !== id)
+        }
+        else {
+            filteredTodos = todos.map((element: ToDo) => {
+                if (element.id === id) {
+                    element.completed = element.completed === true ? false : true;
+                }
+                return element;
+            })
+        }
+        setTodos(filteredTodos);
+    }
     return (
-        <ToDoContext.Provider value={{ todosArray: todos, currentValue: currentData, active: true, completed: false, setInputValue, setTodoArray }}>
+        <ToDoContext.Provider value={{ todosArray: todos, currentValue: currentData, setInputValue, setTodoArray, updateTodosArray }}>
             {children}
         </ToDoContext.Provider>
     )
